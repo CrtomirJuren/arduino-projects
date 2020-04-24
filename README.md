@@ -6,23 +6,11 @@ Vsi arduino projekti in poglavlja
 <!-- MarkdownTOC autolink="true" bracket="round" markdown_preview="markdown" -->
 - [](#)
 - [PySerial](#pyserial)
-- [Digital Input](#digital-input)
-    - [](#)
-    - [](#)
-- [Analog Output](#analog-output)
-    - [](#)
-    - [](#)
-- [Servo Motor Control](#servo-motor-control)
-    - [](#)
-    - [](#)
-- [Learning resources](#learning-resources)
-    - [Links](#)
-    - [E-books](#)
 <!-- /MarkdownTOC -->
 
-# PySerial {: #pyserial }
+# PySerial
 
-[PySerial](./pyserial/pyserial.md)
+[PySerial](./pyserial/README.md)
 
 ## Set Digital Output
 - [folder](SetDigitalOutput)

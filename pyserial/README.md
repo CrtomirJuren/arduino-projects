@@ -22,29 +22,29 @@ Projekti, ki združujejo: arduino, python, serial communication, pyserial.
     - [E-books](#)
 <!-- /MarkdownTOC -->
 
-# Digital Output {: #digital-output }
+# Digital Output
 
 ## Set Digital Output
 - [folder](SetDigitalOutput)
 - [readme](SetDigitalOutput/readme.md)
 
-# Digital Input {: #digital-input }
+# Digital Input
 
 ## Get Digital Input
 - [folder](GetDigitalInput)
 - [readme](GetDigitalInput/readme.md)
 
-# Analog Input {: #analog-input }
+# Analog Input
 
-# Analog Output {: #analog-output }
+# Analog Output
 
-# Servo motor control {: #servo-motor-control }
+# Servo motor control
 
 ## Single servo motor control
 - [folder](GetDigitalInput)
 - [readme](GetDigitalInput/readme.md)
 
-# Learning resources {: #learning-resources }
+# Learning resources
 
 ## Links
 - []()
