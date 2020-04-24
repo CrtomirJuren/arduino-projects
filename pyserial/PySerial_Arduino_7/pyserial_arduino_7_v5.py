@@ -2,13 +2,16 @@
 """
   example for sending potentimeter value to PC over serial
   and testing python code
-  
+
   USING PYTHON LIST
   1.WE COLLECT MULTIPLE POINTS
   2.CREATE AVARAGE OF DATA
 """
 #imports
+#import serial
 import serial
+#from serial import tools
+from serial.tools import list_ports
 import time
 import os #for file manegment
 
@@ -37,8 +40,8 @@ dataFile = open("dataFile_%s.txt" % i, "w")
 #---------------------SERIAL PORT FUNCTIONS-------------------------------
 def get_ports():
     #get a list of all active ports on PC
-    ports = serial.tools.list_ports.comports()    
-    
+    ports = serial.tools.list_ports.comports()
+
     #print(portData)
     print("total COM ports = " + str(len(ports))) #number of COM ports on computer
 
@@ -49,14 +52,14 @@ def findArduino(portsFound):
     #initialize variables
     commPort='none'
     numConnections = len(portsFound)
-    
+
     for i in range(0,numConnections):
         port = portsFound[i]
         strPort = str(port)
-    
+
     if numConnections == 0:
         strPort = ""
-    
+
     #search string in port names and split it
     """
     DEFAULT STRING NAME OF ARDUINO PORT
@@ -65,7 +68,7 @@ def findArduino(portsFound):
     list[]=[COM3,-,Arduino,Uno]
     list[0] = COM3
     """
-    
+
     if 'Arduino' in strPort:
         splitPort = strPort.split(' ')
         commPort = (splitPort[0])
@@ -91,6 +94,15 @@ port = serial.Serial(
 foundPorts = get_ports()
 connectPort = findArduino(foundPorts)
 #----------------SERIAL PORT INITIALIZATION--------------
+port = serial.Serial(
+    connectPort,
+    baudrate=9600,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=1
+    )
+
 try:
     port = serial.Serial(
         connectPort,
@@ -107,12 +119,12 @@ except IOError: # if port is already opened, close it and open it again and prin
   port.close()
   port.open()
   print ("port was already open, was closed and opened again!")
-  
+
 
 #after serial.serial arduino resets. we see this on arduino blinking L led
 #we need to wait until arduino is ready
 
-time.sleep(3) 
+time.sleep(3)
 
 print("Example for transfering multiple data points")
 print('0 = exit, 1=get arduino multiple data:\n')
@@ -129,7 +141,6 @@ def getAvarage(dataSet,row):
     dataAvg = sum(dataSet) / len(dataSet)
     print('Avarage for ' + str(row) + ' is: ' + str(dataAvg))
 
-
 def getValue():
     port.write(b'1')
     #arduinoData = port.readline()                #RESULT = 453
@@ -144,20 +155,20 @@ def getValues():
 
 def printValues():
     print("data list = ")
-    print(dataList) 
-    
+    print(dataList)
+
     print("data avg = ")
     dataAvg = sum(dataList)/numPoints
     print(dataAvg)
-    
+
     dataFile.write(str(dataAvg)+'\n')
-    
+
     #dataFile.write("\t")
-    
+
     #check received data type of first element
     #print('dataList[0]:')
     #print(type(dataList[0]))
-    
+
     return
 '''
 def closePort():
@@ -176,27 +187,25 @@ while True:
         for row in range(0,numRowsCollect):
             for i in range(0,numPoints):
                 #get string data from arduino
-                data = getValues() 
+                data = getValues()
                 printToFile(data,i)
                 #convert string to numeric
                 data = int(data)
-                #store numeric data into list 
-                dataList[i] = data 
-           
+                #store numeric data into list
+                dataList[i] = data
+
             getAvarage(dataList,row)
-        
-        dataFile.close()    
+
+        dataFile.close()
         #print(dataList)
         #printValues()
 
-    break #stop while loop    
-    
-'''    
+    #break #stop while loop
     if userInput == '0':
         print("Exiting the Program")
 
-        #closePort()
+        closePort()
         break
 
-'''
+
 
